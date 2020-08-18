@@ -2,7 +2,7 @@ project(n2n)
 cmake_minimum_required(VERSION 2.6)
 
 # N2n information
-set(N2N_VERSION 2.1.0)
+set(N2N_VERSION 2.1.0s)
 set(N2N_OSNAME ${CMAKE_SYSTEM})
 
 # N2n specific params
@@ -99,11 +99,11 @@ endif(N2N_OPTION_AES)
 # For Solaris (or OpenSolaris?)
 #target_link_libraries(n2n socket nsl)
 
-add_executable(edge edge.c)
-target_link_libraries(edge n2n)
+add_executable(edge2s edge.c)
+target_link_libraries(edge2s n2n)
 
-add_executable(supernode sn.c)
-target_link_libraries(supernode n2n)
+add_executable(supernode2s sn.c)
+target_link_libraries(supernode2s n2n)
 
 add_executable(n2n_test n2n_test.c)
 target_link_libraries(n2n_test n2n)
@@ -114,14 +114,14 @@ target_link_libraries(benchmark n2n)
 add_executable(benchmark_hashtable benchmark_hashtable.c)
 target_link_libraries(benchmark_hashtable n2n)
 
-install(TARGETS edge supernode
+install(TARGETS edge2s supernode2s
         RUNTIME DESTINATION sbin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
        )
 
 # Documentation
-if(DEFINED UNIX)
+if(DEFINED UNIXDOC)
 add_dependencies(n2n doc)
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/doc)
 add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/doc/edge.8.gz
@@ -159,4 +159,4 @@ install(FILES ${PROJECT_BINARY_DIR}/doc/n2n_v2.7.gz
 install(PROGRAMS ${PROJECT_SOURCE_DIR}/munin/n2n-supernode
         DESTINATION /usr/share/munin/plugins)
 
-endif(DEFINED UNIX)
+endif(DEFINED UNIXDOC)
